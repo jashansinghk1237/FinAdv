@@ -64,6 +64,7 @@ public class SecurityConfig {
                     // Admin ke saare API endpoints public hain. Koi security nahi.
                     .requestMatchers("/api/admin/**").permitAll() 
                     .anyRequest().authenticated()
+                    //
             );
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
