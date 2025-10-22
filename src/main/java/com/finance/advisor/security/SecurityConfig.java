@@ -44,7 +44,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*")); // Production mein "*" use mat karna, specific domain daalna
+        configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Auth-Token"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -59,19 +59,11 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                
-                // -------- YEH RAHA AAPKA FIX --------
-                // Frontend files ko public access do
-                .requestMatchers("/", "/index.html", "/css/**", "/js/**", "/images/**", "/favicon.ico").permitAll()
-                
-                // Authentication (login/register) APIs ko public access do
-                .requestMatchers("/api/auth/**").permitAll()
-                
-                // Admin APIs ko public access do (jaisa aapne pehle kiya tha)
-                .requestMatchers("/api/admin/**").permitAll() 
-                
-                // Inke alawa baaki sabhi requests ko authentication chahiye
-                .anyRequest().authenticated()
+                    .requestMatchers("/api/auth/**").permitAll()
+                    // VIVA KE LIYE SIMPLE SOLUTION:
+                    // Admin ke saare API endpoints public hain. Koi security nahi.
+                    .requestMatchers("/api/admin/**").permitAll() 
+                    .anyRequest().authenticated()
             );
 
         http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
@@ -79,3 +71,4 @@ public class SecurityConfig {
         return http.build();
     }
 }
+
