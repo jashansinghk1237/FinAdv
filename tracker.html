@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense & Income Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div id="app" class="max-w-7xl mx-auto p-4">
+        <header class="bg-white shadow-md rounded-lg mb-6 p-4 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-indigo-600">Financial Tracker</h1>
+            <div>
+                <a href="index.html" class="mr-4 text-indigo-600 hover:underline">Stock Dashboard</a>
+                <button id="logout-btn" class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600">Logout</button>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Balance & Forms -->
+            <div class="md:col-span-1 space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <h2 class="text-xl font-semibold text-gray-600">Current Balance</h2>
+                    <p class="text-4xl font-bold text-green-600 mt-2">$<span id="current-balance">0.00</span></p>
+                </div>
+
+                <!-- Add Income -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4">Add Income</h2>
+                    <form id="income-form">
+                        <div class="mb-4">
+                            <label for="income-source" class="block text-sm font-medium text-gray-700">Source</label>
+                            <input type="text" id="income-source" placeholder="e.g., Salary, Freelance" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="income-amount" class="block text-sm font-medium text-gray-700">Amount</label>
+                            <input type="number" step="0.01" id="income-amount" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                        </div>
+                        <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700">Add Income</button>
+                    </form>
+                </div>
+
+                <!-- Add Expense -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4">Add Expense</h2>
+                    <form id="expense-form">
+                        <div class="mb-4">
+                            <label for="expense-category" class="block text-sm font-medium text-gray-700">Category</label>
+                            <input type="text" id="expense-category" placeholder="e.g., Groceries, Rent" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="expense-amount" class="block text-sm font-medium text-gray-700">Amount</label>
+                            <input type="number" step="0.01" id="expense-amount" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                        </div>
+                        <button type="submit" class="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700">Add Expense</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Transaction Lists -->
+            <div class="md:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                 <!-- Income List -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4">Income History</h2>
+                    <div id="income-list" class="space-y-3 max-h-[600px] overflow-y-auto">
+                        <!-- Income items will be injected here -->
+                    </div>
+                </div>
+                 <!-- Expense List -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-4">Expense History</h2>
+                    <div id="expense-list" class="space-y-3 max-h-[600px] overflow-y-auto">
+                        <!-- Expense items will be injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-red-500 text-white py-3 px-6 rounded-lg shadow-xl opacity-0 transition-opacity duration-300">
+        <p id="toast-message"></p>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const API_BASE_URL = 'http://localhost:9090';
+
+        const balanceEl = document.getElementById('current-balance');
+        const incomeForm = document.getElementById('income-form');
+        const expenseForm = document.getElementById('expense-form');
+        const incomeListEl = document.getElementById('income-list');
+        const expenseListEl = document.getElementById('expense-list');
+        const logoutBtn = document.getElementById('logout-btn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        const showToast = (message, isSuccess = true) => {
+            toastMessage.textContent = message;
+            toast.className = `fixed bottom-5 right-5 text-white py-3 px-6 rounded-lg shadow-xl transition-opacity duration-300 opacity-100 ${isSuccess ? 'bg-green-600' : 'bg-red-600'}`;
+            setTimeout(() => { toast.classList.remove('opacity-100'); }, 3000);
+        };
+
+        const apiFetch = async (endpoint, options = {}) => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'index.html'; // Redirect if not logged in
+                return;
+            }
+            const headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`, ...options.headers };
+            try {
+                const response = await fetch(`${API_BASE_URL}${endpoint}`, { ...options, headers });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            } catch (error) {
+                console.error('API Fetch Error:', error);
+                showToast(error.message || 'An unexpected error occurred.', false);
+                if (error.message.includes('403')) logout(); // Token might be expired
+                throw error;
+            }
+        };
+
+        const renderUserData = (user) => {
+            balanceEl.textContent = user.balance.toFixed(2);
+            
+            incomeListEl.innerHTML = user.incomeSources.length ? '' : '<p class="text-gray-500">No income recorded yet.</p>';
+            user.incomeSources.slice().reverse().forEach(inc => {
+                const div = document.createElement('div');
+                div.className = 'flex justify-between items-center p-2 border-b';
+                div.innerHTML = `
+                    <div>
+                        <p class="font-semibold">${inc.source}</p>
+                        <p class="text-xs text-gray-500">${new Date(inc.date).toLocaleDateString()}</p>
+                    </div>
+                    <span class="font-semibold text-green-600">+$${inc.amount.toFixed(2)}</span>
+                `;
+                incomeListEl.appendChild(div);
+            });
+
+            expenseListEl.innerHTML = user.expenses.length ? '' : '<p class="text-gray-500">No expenses recorded yet.</p>';
+            user.expenses.slice().reverse().forEach(exp => {
+                const div = document.createElement('div');
+                div.className = 'flex justify-between items-center p-2 border-b';
+                div.innerHTML = `
+                    <div>
+                        <p class="font-semibold">${exp.category}</p>
+                        <p class="text-xs text-gray-500">${new Date(exp.date).toLocaleDateString()}</p>
+                    </div>
+                    <span class="font-semibold text-red-600">-$${exp.amount.toFixed(2)}</span>
+                `;
+                expenseListEl.appendChild(div);
+            });
+        };
+
+        const loadInitialData = async () => {
+            try {
+                const user = await apiFetch('/api/user/profile');
+                renderUserData(user);
+            } catch (error) {
+                console.error('Failed to load initial data');
+            }
+        };
+
+        incomeForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const source = document.getElementById('income-source').value;
+            const amount = document.getElementById('income-amount').value;
+            try {
+                const updatedUser = await apiFetch('/api/user/income', {
+                    method: 'POST',
+                    body: JSON.stringify({ source, amount })
+                });
+                renderUserData(updatedUser);
+                incomeForm.reset();
+                showToast('Income added successfully!', true);
+            } catch (error) {
+                console.error('Failed to add income');
+            }
+        });
+
+        expenseForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const category = document.getElementById('expense-category').value;
+            const amount = document.getElementById('expense-amount').value;
+            try {
+                const updatedUser = await apiFetch('/api/user/expenses', {
+                    method: 'POST',
+                    body: JSON.stringify({ category, amount })
+                });
+                renderUserData(updatedUser);
+                expenseForm.reset();
+                showToast('Expense added successfully!', true);
+            } catch (error) {
+                console.error('Failed to add expense');
+            }
+        });
+
+        const logout = () => {
+            localStorage.removeItem('token');
+            window.location.href = 'index.html';
+        };
+
+        logoutBtn.addEventListener('click', logout);
+        loadInitialData();
+    });
+</script>
+</body>
+</html>

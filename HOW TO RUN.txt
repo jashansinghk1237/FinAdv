@@ -1,0 +1,9 @@
+step 1 RUN JAVA MAIN FILE
+step 2 IN GOLD-PRICE ---> src -->server.js
+		run server.js by
+		Node server.js;
+
+step 3;
+	go to Babaji ai then run
+	
+	python app.py;

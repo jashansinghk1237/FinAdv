@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Advisor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .page { display: none; }
+        .page.active { display: block; }
+        .stock-up { color: #22c55e; } /* green-500 */
+        .stock-down { color: #ef4444; } /* red-500 */
+        #notification-container {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .notification {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.5s ease-in-out;
+            min-width: 250px;
+        }
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* --- Styles for Custom Chat Button --- */
+        #custom-chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9998;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        #custom-chat-button:hover {
+            transform: scale(1.1);
+        }
+        .speech-bubble {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background-color: white;
+            padding: 8px 12px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        .speech-bubble.hidden {
+            opacity: 0;
+        }
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: 20px;
+            border-width: 8px;
+            border-style: solid;
+            border-color: white transparent transparent transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div id="app" class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- Auth Page (Login/Signup) -->
+        <div id="auth-page" class="page active">
+             <div class="flex items-center justify-center min-h-screen">
+                <div class="relative w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
+                    <div id="login-form-container">
+                        <h2 class="text-2xl font-bold text-center mb-6">Login</h2>
+                        <form id="login-form">
+                            <input type="text" id="login-username" placeholder="Username" class="mb-4 block w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                            <input type="password" id="login-password" placeholder="Password" class="mb-6 block w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                            <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700">Login</button>
+                        </form>
+                        <p class="text-center text-sm mt-6">Don't have an account? <a href="#" id="show-signup" class="font-medium text-indigo-600 hover:text-indigo-500">Sign Up</a></p>
+                    </div>
+                    <div id="signup-form-container" class="hidden">
+                        <h2 class="text-2xl font-bold text-center mb-6">Sign Up</h2>
+                        <form id="signup-form">
+                            <input type="text" id="signup-username" placeholder="Username" class="mb-4 block w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                            <input type="password" id="signup-password" placeholder="Password" class="mb-6 block w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                            <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700">Sign Up</button>
+                        </form>
+                        <p class="text-center text-sm mt-6">Already have an account? <a href="#" id="show-login" class="font-medium text-indigo-600 hover:text-indigo-500">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Blocked / Fine Page -->
+        <div id="fine-page" class="page">
+            <div class="flex items-center justify-center min-h-screen">
+                <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg text-center">
+                    <h2 class="text-2xl font-bold text-red-600 mb-4">Account Blocked</h2>
+                    <p class="text-gray-700 mb-2">Your account has been blocked by an administrator.</p>
+                    <p class="mb-4"><strong>Reason:</strong> <span id="fine-reason" class="font-semibold"></span></p>
+                    <div class="bg-red-100 border-l-4 border-red-500 text-red-800 p-4 rounded-md" role="alert">
+                        <p class="font-bold">Fine Amount: $<span id="fine-amount"></span></p>
+                    </div>
+                    <p class="text-sm text-gray-600 my-4">You must pay the fine from your account balance to regain access.</p>
+                    <p class="text-sm font-semibold mb-4">Your current balance: $<span id="fine-page-balance"></span></p>
+                    <button id="pay-fine-btn" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 disabled:bg-gray-400">Pay Fine</button>
+                    <button id="blocked-logout-btn" class="w-full mt-2 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main App Page -->
+        <div id="main-page" class="page">
+             <header class="bg-white shadow-md rounded-xl mb-6 p-4 flex justify-between items-center">
+                <h1 class="text-2xl sm:text-3xl font-bold text-indigo-600">Stock Dashboard</h1>
+                <div>
+                      <a href="baba-ji.html" class="mr-4 text-indigo-600 hover:underline font-semibold">Ask Baba-ji (AI)</a>
+                    
+                    <a href="http://localhost:3000" class="mr-4 text-indigo-600 hover:underline">Commodity Prices</a>
+                    <a href="tracker.html" class="mr-4 text-indigo-600 hover:underline">Expense Tracker</a>
+                    <span id="username-display" class="hidden sm:inline mr-4 font-semibold"></span>
+                    <button id="logout-btn" class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600">Logout</button>
+                </div>
+            </header>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-1 space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md"><h2 class="text-xl font-semibold mb-4 border-b pb-2">Financial Advice</h2><div id="advice-container" class="space-y-4 text-sm"></div></div>
+                    <div class="bg-white p-6 rounded-xl shadow-md"><h2 class="text-xl font-semibold mb-4">My Portfolio</h2><p class="mb-2 text-sm text-gray-600"><strong>Account Balance:</strong> $<span id="profile-balance" class="font-bold"></span></p><div id="portfolio-list" class="space-y-3"></div></div>
+                </div>
+                <div class="lg:col-span-2 space-y-6"><div class="bg-white p-6 rounded-xl shadow-md"><h2 class="text-xl font-semibold mb-4">Stock Market</h2><div id="stock-market-grid" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 max-h-[600px] overflow-y-auto p-1"></div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification & Toast Containers -->
+    <div id="notification-container"></div>
+    <div id="toast" class="fixed bottom-5 right-5 bg-red-500 text-white py-3 px-6 rounded-lg shadow-xl opacity-0 transition-opacity duration-300"><p id="toast-message"></p></div>
+    
+    <!-- BOTPRESS CHATBOT INTEGRATION -->
+    <div id="custom-chat-button" style="display: none;">
+        <div id="hello-bubble" class="speech-bubble">Hello! How can I help?</div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="bg-indigo-600 text-white p-4 rounded-full shadow-lg">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+    </div>
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
+    <script>
+      window.botpressWebChat.init({
+        "configUrl": "https://files.bpcontent.cloud/2025/09/24/05/20250924050936-SMSVAO8C.json",
+        "hideWidget": true
+      });
+      window.botpressWebChat.on('ready', function() {
+        document.getElementById('custom-chat-button').style.display = 'block';
+      });
+      document.getElementById('custom-chat-button').addEventListener('click', function() {
+        window.botpressWebChat.send({ type: 'toggle' });
+        document.getElementById('hello-bubble').classList.add('hidden');
+      });
+    </script>
+    
+<script>
+    // Main Application Logic
+    document.addEventListener('DOMContentLoaded', () => {
+        const API_BASE_URL = 'http://localhost:9090';
+        let stockInterval;
+        let stockData = {};
+        let userPortfolio = [];
+        
+        const pages = { 
+            auth: document.getElementById('auth-page'), 
+            main: document.getElementById('main-page'), 
+            fine: document.getElementById('fine-page') 
+        };
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const loginContainer = document.getElementById('login-form-container');
+        const signupContainer = document.getElementById('signup-form-container');
+        const toastEl = document.getElementById('toast');
+        const toastMessageEl = document.getElementById('toast-message');
+
+        const showToast = (message, isSuccess = true) => {
+            toastMessageEl.textContent = message;
+            toastEl.className = `fixed bottom-5 right-5 text-white py-3 px-6 rounded-lg shadow-xl transition-opacity duration-300 opacity-100 ${isSuccess ? 'bg-green-600' : 'bg-red-600'}`;
+            setTimeout(() => { toastEl.classList.remove('opacity-100'); }, 3000);
+        };
+        
+        const apiFetch = async (endpoint, options = {}) => {
+            const token = localStorage.getItem('token');
+            const headers = { 'Content-Type': 'application/json', ...options.headers };
+            if (token) { headers['Authorization'] = `Bearer ${token}`; }
+            const response = await fetch(`${API_BASE_URL}${endpoint}`, { ...options, headers });
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ message: `HTTP error! Status: ${response.status}` }));
+                throw new Error(errorData.message || 'An unknown error occurred.');
+            }
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                return response.json();
+            }
+            return {};
+        };
+
+        const switchPage = (pageKey) => {
+            Object.values(pages).forEach(p => p && p.classList.remove('active'));
+            if (pages[pageKey]) {
+                pages[pageKey].classList.add('active');
+            } else {
+                console.error(`Page with key '${pageKey}' not found.`);
+            }
+        };
+
+        const logout = () => {
+            localStorage.removeItem('token');
+            if(stockInterval) clearInterval(stockInterval);
+            stockData = {};
+            userPortfolio = [];
+            switchPage('auth');
+            loginContainer.classList.remove('hidden');
+            signupContainer.classList.add('hidden');
+        };
+
+        const checkAuth = async () => {
+            if (!localStorage.getItem('token')) {
+                switchPage('auth');
+                return;
+            }
+            try {
+                const user = await apiFetch('/api/user/profile');
+                if (user.blocked) {
+                    displayFinePage(user);
+                    switchPage('fine'); 
+                } else {
+                    loadDashboardData(user);
+                    switchPage('main');
+                }
+            } catch(error) {
+                showToast('Your session has expired. Please log in again.', false);
+                logout();
+            }
+        };
+        
+        const displayFinePage = (user) => {
+            document.getElementById('fine-reason').textContent = user.fineReason || 'No reason provided';
+            document.getElementById('fine-amount').textContent = user.fineAmount.toFixed(2);
+            document.getElementById('fine-page-balance').textContent = user.balance.toFixed(2);
+            const payBtn = document.getElementById('pay-fine-btn');
+            payBtn.disabled = user.balance < user.fineAmount;
+            payBtn.textContent = user.balance < user.fineAmount ? 'Insufficient Balance' : 'Pay Fine';
+        };
+
+        const loadDashboardData = (user) => {
+            updateUIWithProfileData(user);
+            startStockUpdates();
+        };
+
+        const updateUIWithProfileData = (user) => {
+             document.getElementById('username-display').textContent = user.username;
+             document.getElementById('profile-balance').textContent = user.balance.toFixed(2);
+             userPortfolio = user.portfolio || [];
+             renderPortfolio();
+        };
+        
+        const renderPortfolio = () => {
+            const portfolioList = document.getElementById('portfolio-list');
+            if (!userPortfolio || userPortfolio.length === 0) {
+                portfolioList.innerHTML = '<p class="text-gray-500 text-sm">You do not own any stocks.</p>';
+                return;
+            }
+            portfolioList.innerHTML = '';
+            userPortfolio.forEach(item => {
+                 const currentPrice = stockData[item.stockSymbol]?.current || item.purchasePrice;
+                 const currentValue = item.quantity * currentPrice;
+                 const profitLoss = currentValue - (item.quantity * item.purchasePrice);
+                 const profitLossClass = profitLoss >= 0 ? 'text-green-500' : 'text-red-500';
+                 const profitLossSign = profitLoss >= 0 ? '+' : '';
+                 const div = document.createElement('div');
+                 div.className = 'grid grid-cols-3 gap-2 items-center p-2 border-b text-sm';
+                 div.innerHTML = `
+                     <div><span class="font-bold">${item.stockSymbol}</span><span class="text-xs text-gray-500 block">${item.quantity.toFixed(4)} shares</span></div>
+                     <div class="text-right"><span class="font-semibold block">$${currentValue.toFixed(2)}</span><span class="${profitLossClass}">${profitLossSign}$${profitLoss.toFixed(2)}</span></div>
+                     <div class="text-right"><button class="sell-stock-btn text-xs bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600" data-symbol="${item.stockSymbol}" data-quantity="${item.quantity}">Sell</button></div>`;
+                 portfolioList.appendChild(div);
+            });
+        };
+
+        const fetchStocks = async () => {
+             try {
+                const prices = await apiFetch('/api/stocks');
+                if (pages.main.classList.contains('active')) {
+                    const user = await apiFetch('/api/user/profile');
+                    updateUIWithProfileData(user);
+                    checkPortfolioForNotifications();
+                    generateAdvice();
+                }
+                updateStockGrid(prices);
+             } catch (error) {
+                console.error("Failed to fetch stocks", error);
+                if(stockInterval) clearInterval(stockInterval);
+             }
+        };
+        
+        const startStockUpdates = () => {
+            if (stockInterval) clearInterval(stockInterval);
+            fetchStocks();
+            stockInterval = setInterval(fetchStocks, 5000); 
+        };
+        
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            if (username === 'admin') {
+                try {
+                    const data = await apiFetch('/api/auth/login', { method: 'POST', body: JSON.stringify({ username, password }) });
+                    localStorage.setItem('admin_token', data.token);
+                    showToast('Admin login successful! Redirecting...', true);
+                    setTimeout(() => { window.location.href = 'admin.html'; }, 1000);
+                } catch (error) { showToast(error.message, false); }
+                return;
+            }
+            try {
+                const data = await apiFetch('/api/auth/login', { method: 'POST', body: JSON.stringify({ username, password }) });
+                localStorage.setItem('token', data.token);
+                loginForm.reset();
+                await checkAuth();
+            } catch (error) { showToast(error.message, false); }
+        });
+
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('signup-username').value;
+            const password = document.getElementById('signup-password').value;
+            try {
+                await apiFetch('/api/auth/signup', { method: 'POST', body: JSON.stringify({ username, password }) });
+                showToast("Signup successful! Please log in.", true);
+                document.getElementById('show-login').click();
+                signupForm.reset();
+            } catch (error) { showToast(error.message, false); }
+        });
+        
+        document.getElementById('pay-fine-btn').addEventListener('click', async () => {
+            try {
+                await apiFetch('/api/user/pay-fine', { method: 'POST' });
+                showToast('Fine paid successfully! Welcome back.', true);
+                await checkAuth();
+            } catch (error) { showToast(error.message, false); }
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', logout);
+        document.getElementById('blocked-logout-btn').addEventListener('click', logout);
+        document.getElementById('show-signup').addEventListener('click', (e) => { e.preventDefault(); signupContainer.classList.remove('hidden'); loginContainer.classList.add('hidden'); });
+        document.getElementById('show-login').addEventListener('click', (e) => { e.preventDefault(); loginContainer.classList.remove('hidden'); signupContainer.classList.add('hidden'); });
+
+        document.getElementById('stock-market-grid').addEventListener('click', async (e) => {
+            if (e.target.classList.contains('buy-stock-btn')) {
+                const symbol = e.target.dataset.symbol;
+                const quantityStr = prompt(`How many shares of ${symbol} do you want to buy?`);
+                if (quantityStr) {
+                    const quantity = parseFloat(quantityStr);
+                    if (quantity > 0) {
+                        try {
+                            const updatedUser = await apiFetch('/api/user/portfolio/buy', { method: 'POST', body: JSON.stringify({ stockSymbol: symbol, quantity: quantity }) });
+                            showToast(`Successfully bought ${quantity} shares of ${symbol}!`, true);
+                            updateUIWithProfileData(updatedUser);
+                        } catch (error) { showToast(error.message, false); }
+                    } else { alert('Please enter a valid positive number.'); }
+                }
+            }
+        });
+
+        document.getElementById('portfolio-list').addEventListener('click', async (e) => {
+            if (e.target.classList.contains('sell-stock-btn')) {
+                const symbol = e.target.dataset.symbol;
+                const maxQuantity = parseFloat(e.target.dataset.quantity);
+                const quantityStr = prompt(`How many shares of ${symbol} do you want to sell?\n(You own ${maxQuantity.toFixed(4)})`);
+                if (quantityStr) {
+                    const quantity = parseFloat(quantityStr);
+                    if (quantity > 0 && quantity <= maxQuantity) {
+                        try {
+                            const updatedUser = await apiFetch('/api/user/portfolio/sell', { method: 'POST', body: JSON.stringify({ stockSymbol: symbol, quantity: quantity }) });
+                            showToast(`Successfully sold ${quantity} shares of ${symbol}!`, true);
+                            updateUIWithProfileData(updatedUser);
+                        } catch (error) { showToast(error.message, false); }
+                    } else { alert(`Please enter a valid number between 0 and ${maxQuantity}.`); }
+                }
+            }
+        });
+
+        const updateStockGrid = (prices) => {
+            const grid = document.getElementById('stock-market-grid');
+            if (!grid) return;
+            Object.keys(prices).forEach(symbol => {
+                const newPrice = prices[symbol];
+                const oldPrice = stockData[symbol]?.current;
+                let direction = oldPrice && newPrice > oldPrice ? 'up' : (oldPrice && newPrice < oldPrice ? 'down' : 'unchanged');
+                stockData[symbol] = { current: newPrice, previous: oldPrice, direction: direction };
+            });
+            grid.innerHTML = Object.entries(stockData).sort((a, b) => a[0].localeCompare(b[0])).map(([symbol, data]) => {
+                const cardClass = data.direction === 'up' ? 'border-green-400 bg-green-50' : (data.direction === 'down' ? 'border-red-400 bg-red-50' : 'border-gray-200');
+                const textClass = data.direction === 'up' ? 'stock-up' : (data.direction === 'down' ? 'stock-down' : '');
+                return `<div class="p-3 rounded-lg border shadow-sm flex flex-col items-center justify-center ${cardClass}">
+                            <div class="font-bold text-lg">${symbol}</div>
+                            <div class="text-xl font-medium ${textClass}">$${data.current.toFixed(2)}</div>
+                            <button class="buy-stock-btn mt-2 text-xs bg-indigo-500 text-white px-2 py-1 rounded" data-symbol="${symbol}">Buy</button>
+                        </div>`;
+            }).join('');
+        };
+        
+        const checkPortfolioForNotifications = () => {
+            const notificationContainer = document.getElementById('notification-container');
+            (userPortfolio || []).forEach(item => {
+                const stock = stockData[item.stockSymbol];
+                if (stock && stock.direction !== 'unchanged') {
+                    const existingNotif = document.querySelector(`.notification[data-symbol="${item.stockSymbol}"]`);
+                    if (existingNotif) existingNotif.remove();
+                    const notif = document.createElement('div');
+                    notif.className = 'notification';
+                    notif.dataset.symbol = item.stockSymbol;
+                    const textClass = stock.direction === 'up' ? 'stock-up' : 'stock-down';
+                    notif.innerHTML = `<p class="font-bold">${item.stockSymbol} price changed!</p><p>New Price: <span class="${textClass}">$${stock.current.toFixed(2)}</span></p>`;
+                    notificationContainer.prepend(notif);
+                    setTimeout(() => notif.classList.add('show'), 10);
+                    setTimeout(() => {
+                        notif.classList.remove('show');
+                        setTimeout(() => notif.remove(), 500);
+                    }, 4500);
+                }
+            });
+        };
+
+        const generateAdvice = () => {
+            const adviceContainer = document.getElementById('advice-container');
+            if (!adviceContainer) return;
+            let advices = [];
+            const sortedStocks = Object.entries(stockData).sort((a,b) => a[1].current - b[1].current);
+            if(sortedStocks.length > 0) {
+                advices.push(`<p>💡 <strong>Opportunity?</strong> The lowest priced stock is ${sortedStocks[0][0]} at $${sortedStocks[0][1].current.toFixed(2)}.</p>`);
+            }
+            const recentlyDropped = Object.entries(stockData).filter(([, data]) => data.direction === 'down');
+            if(recentlyDropped.length > 0) {
+                 advices.push(`<p>📉 <strong>Dip Alert:</strong> ${recentlyDropped[Math.floor(Math.random() * recentlyDropped.length)][0]} recently dropped. Might be a good time to look.</p>`);
+            }
+             if (!userPortfolio || userPortfolio.length === 0) {
+                advices.push(`<p>🚀 <strong>Get Started:</strong> Your portfolio is empty! Consider buying a small amount to start.</p>`);
+            }
+            adviceContainer.innerHTML = advices.join('');
+        };
+
+        checkAuth();
+    });
+</script>
+
+    <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/09/24/05/20250924050936-8Z33J60U.js" defer></script>
+    
+
+
+
+
+
+
+</body>
+</html>
+

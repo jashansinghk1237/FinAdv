@@ -1,0 +1,1227 @@
+{
+  "history": [
+    {
+      "timestamp": "2025-09-24T09:16:20.539Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "query": "gold price today",
+          "raw": ""
+        },
+        "silver": {
+          "metal": "silver",
+          "query": "silver price today",
+          "raw": ""
+        },
+        "diamond": {
+          "metal": "diamond",
+          "query": "diamond price today per carat",
+          "raw": ""
+        },
+        "platinum": {
+          "metal": "platinum",
+          "query": "platinum price today",
+          "raw": ""
+        },
+        "palladium": {
+          "metal": "palladium",
+          "query": "palladium price today",
+          "raw": ""
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:16:27.651Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "query": "gold price today",
+          "raw": ""
+        },
+        "silver": {
+          "metal": "silver",
+          "query": "silver price today",
+          "raw": ""
+        },
+        "diamond": {
+          "metal": "diamond",
+          "query": "diamond price today per carat",
+          "raw": ""
+        },
+        "platinum": {
+          "metal": "platinum",
+          "query": "platinum price today",
+          "raw": ""
+        },
+        "palladium": {
+          "metal": "palladium",
+          "query": "palladium price today",
+          "raw": ""
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:19:09.839Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "query": "gold price today",
+          "raw": ""
+        },
+        "silver": {
+          "metal": "silver",
+          "query": "silver price today",
+          "raw": ""
+        },
+        "diamond": {
+          "metal": "diamond",
+          "query": "diamond price today per carat",
+          "raw": ""
+        },
+        "platinum": {
+          "metal": "platinum",
+          "query": "platinum price today",
+          "raw": ""
+        },
+        "palladium": {
+          "metal": "palladium",
+          "query": "palladium price today",
+          "raw": ""
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:19:19.312Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "query": "gold price today",
+          "raw": ""
+        },
+        "silver": {
+          "metal": "silver",
+          "query": "silver price today",
+          "raw": ""
+        },
+        "diamond": {
+          "metal": "diamond",
+          "query": "diamond price today per carat",
+          "raw": ""
+        },
+        "platinum": {
+          "metal": "platinum",
+          "query": "platinum price today",
+          "raw": ""
+        },
+        "palladium": {
+          "metal": "palladium",
+          "query": "palladium price today",
+          "raw": ""
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:19:29.759Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "query": "gold price today",
+          "raw": ""
+        },
+        "silver": {
+          "metal": "silver",
+          "query": "silver price today",
+          "raw": ""
+        },
+        "diamond": {
+          "metal": "diamond",
+          "query": "diamond price today per carat",
+          "raw": ""
+        },
+        "platinum": {
+          "metal": "platinum",
+          "query": "platinum price today",
+          "raw": ""
+        },
+        "palladium": {
+          "metal": "palladium",
+          "query": "palladium price today",
+          "raw": ""
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:19:33.482Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "query": "gold price today",
+          "raw": ""
+        },
+        "silver": {
+          "metal": "silver",
+          "query": "silver price today",
+          "raw": ""
+        },
+        "diamond": {
+          "metal": "diamond",
+          "query": "diamond price today per carat",
+          "raw": ""
+        },
+        "platinum": {
+          "metal": "platinum",
+          "query": "platinum price today",
+          "raw": ""
+        },
+        "palladium": {
+          "metal": "palladium",
+          "query": "palladium price today",
+          "raw": ""
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:22:37.908Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo",
+          "symbol": "GC=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo",
+          "symbol": "SI=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo",
+          "symbol": "PL=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo",
+          "symbol": "PA=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "USD",
+          "value": null,
+          "raw": "n/a"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:29:18.506Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo",
+          "symbol": "GC=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo",
+          "symbol": "SI=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo",
+          "symbol": "PL=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo",
+          "symbol": "PA=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "USD",
+          "value": null,
+          "raw": "n/a"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:29:19.970Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo",
+          "symbol": "GC=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo",
+          "symbol": "SI=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo",
+          "symbol": "PL=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo",
+          "symbol": "PA=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "USD",
+          "value": null,
+          "raw": "n/a"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:29:21.162Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo",
+          "symbol": "GC=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo",
+          "symbol": "SI=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo",
+          "symbol": "PL=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo",
+          "symbol": "PA=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "USD",
+          "value": null,
+          "raw": "n/a"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:29:23.201Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo",
+          "symbol": "GC=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo",
+          "symbol": "SI=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo",
+          "symbol": "PL=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo",
+          "symbol": "PA=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "USD",
+          "value": null,
+          "raw": "n/a"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:29:24.446Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo",
+          "symbol": "GC=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo",
+          "symbol": "SI=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo",
+          "symbol": "PL=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo",
+          "symbol": "PA=F",
+          "currency": "USD",
+          "value": null,
+          "raw": ""
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "USD",
+          "value": null,
+          "raw": "n/a"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:31:33.851Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo",
+          "symbol": "GC=F",
+          "currency": "USD",
+          "value": 3801.6,
+          "raw": "3801.6"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo",
+          "symbol": "SI=F",
+          "currency": "USD",
+          "value": 44.395,
+          "raw": "44.395"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo",
+          "symbol": "PL=F",
+          "currency": "USD",
+          "value": 1480.7,
+          "raw": "1480.7"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo",
+          "symbol": "PA=F",
+          "currency": "USD",
+          "value": 1248.5,
+          "raw": "1248.5"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "USD",
+          "value": null,
+          "raw": "n/a"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:38:46.014Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 10843.74,
+          "raw": "10843.736887318011",
+          "unit": "per gram"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 126.55,
+          "raw": "126.54878039229362",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4221.15,
+          "raw": "4221.145769144368",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3560.66,
+          "raw": "3560.6555727557766",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:41:53.247Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 10848.97,
+          "raw": "10848.972822871043",
+          "unit": "per gram"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 126.64,
+          "raw": "126.64364944886162",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4226.69,
+          "raw": "4226.687207521443",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3568.85,
+          "raw": "3568.8537157363703",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T09:42:35.819Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 10842.56,
+          "raw": "10842.555324876092",
+          "unit": "per gram"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 126.63,
+          "raw": "126.6272380198988",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4225.76,
+          "raw": "4225.757912697401",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3567.59,
+          "raw": "3567.5872737159725",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T10:06:11.991Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 10833.92,
+          "raw": "10833.92066317165",
+          "unit": "per gram"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 126.64,
+          "raw": "126.64283048896966",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4228.08,
+          "raw": "4228.08009039041",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3566.64,
+          "raw": "3566.6407235862457",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T10:07:06.144Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 10835.26,
+          "raw": "10835.264705841504",
+          "unit": "per gram"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 126.64,
+          "raw": "126.63854608048193",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4227.94,
+          "raw": "4227.937051718926",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3563.67,
+          "raw": "3563.6691265331474",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T10:09:48.504Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 10835.92,
+          "raw": "10835.916260011165",
+          "unit": "per gram"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 126.65,
+          "raw": "126.64708756932279",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4226.61,
+          "raw": "4226.606010810984",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3566.36,
+          "raw": "3566.359179498544",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-24T10:12:16.513Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 10836.16,
+          "raw": "10836.160428855981",
+          "unit": "per gram"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 126.7,
+          "raw": "126.6969590036314",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4224.94,
+          "raw": "4224.942354354418",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3567.58,
+          "raw": "3567.5833995510116",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-26T04:32:24.863Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 10766.08,
+          "raw": "10766.079630043161",
+          "unit": "per gram"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 128.6,
+          "raw": "128.60086111016375",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4433.01,
+          "raw": "4433.007727290475",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3656.38,
+          "raw": "3656.3828774280305",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-26T04:33:25.588Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 10764.51,
+          "raw": "10764.507812194166",
+          "unit": "per gram"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 128.57,
+          "raw": "128.57186756690817",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4432.01,
+          "raw": "4432.008289182642",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3655.56,
+          "raw": "3655.558532286011",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-26T04:34:17.200Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 10768.06,
+          "raw": "10768.057833328781",
+          "unit": "per gram"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 128.6,
+          "raw": "128.5972369172568",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4433.45,
+          "raw": "4433.453199997243",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3656.28,
+          "raw": "3656.2798342852784",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-26T04:36:10.622Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx+delhi-premium",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 11034.92,
+          "raw": "11034.919844716522",
+          "unit": "per gram (24K, Delhi)"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 128.61,
+          "raw": "128.60593835606184",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4432.28,
+          "raw": "4432.278709112031",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3655.31,
+          "raw": "3655.3112287434055",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-26T04:39:43.809Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx+delhi-premium",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 11030.82,
+          "raw": "11030.822145178958",
+          "unit": "per gram (24K, Delhi)"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 128.56,
+          "raw": "128.55905983475134",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4431.49,
+          "raw": "4431.48796471525",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3651.32,
+          "raw": "3651.3225267472353",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-26T04:46:44.973Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx+delhi-premium",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 11035.32,
+          "raw": "11035.324676106626",
+          "unit": "per gram (24K, Delhi)"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 128.53,
+          "raw": "128.53340723632542",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4434.2,
+          "raw": "4434.202875030357",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3655.47,
+          "raw": "3655.471845835575",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-26T05:10:18.799Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx+delhi-premium",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 11039.15,
+          "raw": "11039.154798162306",
+          "unit": "per gram (24K, Delhi)"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 128.4,
+          "raw": "128.3971612138229",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4431.88,
+          "raw": "4431.883359419163",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3659.73,
+          "raw": "3659.7325431477166",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-26T05:15:10.630Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx+delhi-premium",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 11035.01,
+          "raw": "11035.012206336367",
+          "unit": "per gram (24K, Delhi)"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 128.36,
+          "raw": "128.3619143503597",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4432.87,
+          "raw": "4432.869308681273",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3657.71,
+          "raw": "3657.7087420657745",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    }
+  ]
+}

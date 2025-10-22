@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commodity Prices</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        @keyframes pulse {
+            50% { opacity: .5; }
+        }
+        .animate-pulse-fast {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="bg-white shadow-md rounded-xl mb-6 p-4 flex justify-between items-center">
+            <h1 class="text-2xl sm:text-3xl font-bold text-indigo-600">Live Commodity Rates</h1>
+            <a href="index.html" class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700">← Back to Dashboard</a>
+        </header>
+
+        <div id="status-bar" class="mb-4 text-center text-sm font-medium p-3 rounded-lg">
+            <!-- Status message will be injected here -->
+        </div>
+
+        <div id="prices-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Skeleton Loader Cards -->
+            <div class="bg-white p-6 rounded-xl shadow-md animate-pulse-fast"><div class="h-6 bg-gray-200 rounded w-1/2 mb-4"></div><div class="h-8 bg-gray-300 rounded w-3/4 mb-2"></div><div class="h-8 bg-gray-300 rounded w-2/3"></div></div>
+            <div class="bg-white p-6 rounded-xl shadow-md animate-pulse-fast"><div class="h-6 bg-gray-200 rounded w-1/2 mb-4"></div><div class="h-8 bg-gray-300 rounded w-3/4 mb-2"></div><div class="h-8 bg-gray-300 rounded w-2/3"></div></div>
+            <div class="bg-white p-6 rounded-xl shadow-md animate-pulse-fast"><div class="h-6 bg-gray-200 rounded w-1/2 mb-4"></div><div class="h-8 bg-gray-300 rounded w-3/4 mb-2"></div><div class="h-8 bg-gray-300 rounded w-2/3"></div></div>
+            <div class="bg-white p-6 rounded-xl shadow-md animate-pulse-fast"><div class="h-6 bg-gray-200 rounded w-1/2 mb-4"></div><div class="h-8 bg-gray-300 rounded w-3/4 mb-2"></div><div class="h-8 bg-gray-300 rounded w-2/3"></div></div>
+        </div>
+        
+        <footer class="text-center text-xs text-gray-500 mt-8">
+            <p>Disclaimer: Prices are indicative and sourced from a free-tier public API (CoinGecko). They may not be 100% accurate for real-time trading.</p>
+            <p>Last updated: <span id="last-updated">N/A</span></p>
+        </footer>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const pricesGrid = document.getElementById('prices-grid');
+    const statusBar = document.getElementById('status-bar');
+    const lastUpdatedEl = document.getElementById('last-updated');
+
+    const CACHE_KEY = 'commodity_prices_cache_v2';
+    const CACHE_DURATION_MS = 5 * 60 * 1000; // 5 minutes
+
+    // Using a new, more reliable API (CoinGecko)
+    // It provides prices for Gold and Silver against various currencies
+    const commodities = {
+        'gold': 'Gold',
+        'silver': 'Silver',
+        'platinum': 'Platinum',
+        'palladium': 'Palladium'
+    };
+
+    function renderPrices(data, isStale = false) {
+        pricesGrid.innerHTML = ''; // Clear skeleton loaders
+
+        Object.entries(commodities).forEach(([id, name]) => {
+            const priceData = data[id];
+            if (!priceData) return;
+
+            const priceUSD = priceData.usd;
+            const priceINR = priceData.inr;
+
+            const card = document.createElement('div');
+            card.className = 'bg-white p-6 rounded-xl shadow-md transform transition-transform hover:scale-105';
+            
+            card.innerHTML = `
+                <div class="flex items-center justify-between mb-2">
+                    <h2 class="text-xl font-bold text-gray-800">${name}</h2>
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/${{'gold': 21458, 'silver': 21459, 'platinum': 21460, 'palladium': 21461}[id]}.png" alt="${name} icon" class="w-8 h-8"/>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold text-indigo-600">$${priceUSD.toLocaleString('en-US')}</p>
+                    <p class="text-lg font-medium text-gray-500">₹${priceINR.toLocaleString('en-IN')}</p>
+                </div>
+            `;
+            pricesGrid.appendChild(card);
+        });
+
+        const lastUpdatedTime = new Date().toLocaleString();
+        lastUpdatedEl.textContent = lastUpdatedTime;
+        
+        if (isStale) {
+            updateStatus('Showing recently cached data. Fetching live prices in the background...', 'stale');
+        } else {
+            updateStatus('Displaying live prices.', true);
+        }
+    }
+
+    function updateStatus(message, type) {
+        let bgColorClass = 'bg-red-100 text-red-800'; // Default to error
+        if (type === true) {
+            bgColorClass = 'bg-green-100 text-green-800';
+        } else if (type === 'stale') {
+            bgColorClass = 'bg-yellow-100 text-yellow-800';
+        }
+        statusBar.className = `mb-4 text-center text-sm font-medium p-3 rounded-lg ${bgColorClass}`;
+        statusBar.textContent = message;
+    }
+
+    async function fetchAndDisplayPrices() {
+        try {
+            const ids = Object.keys(commodities).join(',');
+            const API_URL = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd,inr`;
+            
+            const response = await fetch(API_URL);
+            if (!response.ok) {
+                throw new Error(`API returned status ${response.status}`);
+            }
+            const data = await response.json();
+
+            if (Object.keys(data).length === 0) {
+                 throw new Error('API returned empty data.');
+            }
+
+            const cacheData = { timestamp: Date.now(), data: data };
+            localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+            
+            renderPrices(data, false);
+
+        } catch (error) {
+            console.error('Failed to fetch live prices:', error);
+            updateStatus(`Could not fetch live data: ${error.message}. Displaying older data if available.`, false);
+        }
+    }
+    
+    function loadInitialData() {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (cached) {
+            const { timestamp, data } = JSON.parse(cached);
+            
+            renderPrices(data, true); // Render stale data first, instantly
+            
+            if (Date.now() - timestamp > CACHE_DURATION_MS) {
+                // If cache is expired, fetch immediately
+                fetchAndDisplayPrices();
+            }
+        } else {
+            updateStatus('Fetching live prices for the first time...', 'stale');
+            fetchAndDisplayPrices();
+        }
+    }
+
+    loadInitialData();
+});
+</script>
+
+</body>
+</html>
+

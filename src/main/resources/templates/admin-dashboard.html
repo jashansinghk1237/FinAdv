@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <h2>Stock Update Schedule</h2>
+    <form th:action="@{/admin/schedule/update}" method="post">
+        <label for="rate">Update every (seconds):</label>
+        <input type="number" id="rate" name="rate" min="1" th:value="${rate}"/>
+        <button type="submit">Update Schedule</button>
+    </form>
+</body>
+</html>

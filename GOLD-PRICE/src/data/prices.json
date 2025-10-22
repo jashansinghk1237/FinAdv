@@ -1,0 +1,102 @@
+{
+  "history": [
+    {
+      "timestamp": "2025-09-27T13:48:52.499Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx+delhi-premium",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 11125.17,
+          "raw": "11125.169831496134",
+          "unit": "per gram (24K, Delhi)"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 132.95,
+          "raw": "132.94723630382055",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4569.21,
+          "raw": "4569.206391743318",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3736.01,
+          "raw": "3736.006548309737",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    },
+    {
+      "timestamp": "2025-09-29T04:37:39.721Z",
+      "entries": {
+        "gold": {
+          "metal": "gold",
+          "source": "yahoo+fx+delhi-premium",
+          "symbol": "GC=F",
+          "currency": "INR",
+          "value": 11189.79,
+          "raw": "11189.787044964696",
+          "unit": "per gram (24K, Delhi)"
+        },
+        "silver": {
+          "metal": "silver",
+          "source": "yahoo+fx",
+          "symbol": "SI=F",
+          "currency": "INR",
+          "value": 135,
+          "raw": "135.00284958496988",
+          "unit": "per gram"
+        },
+        "platinum": {
+          "metal": "platinum",
+          "source": "yahoo+fx",
+          "symbol": "PL=F",
+          "currency": "INR",
+          "value": 4691.16,
+          "raw": "4691.163657948362",
+          "unit": "per gram"
+        },
+        "palladium": {
+          "metal": "palladium",
+          "source": "yahoo+fx",
+          "symbol": "PA=F",
+          "currency": "INR",
+          "value": 3807.11,
+          "raw": "3807.114579550798",
+          "unit": "per gram"
+        },
+        "diamond": {
+          "metal": "diamond",
+          "source": "placeholder",
+          "currency": "INR",
+          "value": null,
+          "raw": "n/a",
+          "unit": "per carat"
+        }
+      }
+    }
+  ]
+}
